@@ -1,14 +1,19 @@
 version: 2
-git:
-  provider: gitlab
-  repo_name: maven-test-frogbot
-  owner: ms/o
-  api_endpoint: https://git.com/api/v4
-scans:
-  - type: maven
-    repo_path: .
-    # Optional: include/exclude patterns for dependency files
-    # include: ["pom.xml"]
-    # exclude: ["test/**"]
-    # Optional: branch to scan against
-    base_branch: main
+
+repos:
+  - git:
+      provider: gitlab
+      owner: ms
+      repo_name: maven-test-frogbot
+      api_endpoint: https://git.com/api/v4
+    projects:
+      - working_dirs:
+          - path: .
+            type: maven
+            # Optional: patterns for dependency files
+            include:
+              - "pom.xml"
+            exclude:
+              - "test/**"
+        scan:
+          base_branch: main
